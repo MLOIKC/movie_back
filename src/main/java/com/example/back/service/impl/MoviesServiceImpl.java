@@ -33,4 +33,9 @@ public class MoviesServiceImpl extends ServiceImpl<MoviesMapper, Movies> impleme
     public IPage listByMovieId(IPage<Movies> page, Wrapper ew) {
         return moviesMapper.listByMovieId(page,ew);
     }
+
+    @Override
+    public IPage listByKeyword(IPage<Movies> page, Wrapper ew) {
+        return moviesMapper.listByKeyword(page,ew);
+    }
 }

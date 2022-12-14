@@ -14,4 +14,5 @@ public class QueryPageParam {
     private int pageNum=PAGE_NUM;
 
     private HashMap param;
+    private Object searchId;
 }

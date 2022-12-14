@@ -7,4 +7,7 @@
     <select id="listByMovieId" resultType="com.example.back.entity.Movies">
         select * from movies ${ew.customSqlSegment}
     </select>
+    <select id="listByKeyword" resultType="com.example.back.entity.Movies">
+        select * from movies ${ew.customSqlSegment}
+    </select>
 </mapper>

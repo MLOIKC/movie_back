@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,17 +47,31 @@ public class MoviesController {
     //根据电影id展示电影
     @PostMapping("/listByMovieId")
     public Result listByMovieId(@RequestBody QueryPageParam queryPageParam){
-        HashMap param=queryPageParam.getParam();
-        Integer movieid=(Integer)param.get("movieid");
+        List<Integer> searchId = (List)queryPageParam.getSearchId();
         Page<Movies> page=new Page<>();
         page.setCurrent(queryPageParam.getPageNum());
         page.setSize(queryPageParam.getPageSize());
 
         LambdaQueryWrapper<Movies> lambdaQueryWrapper = new LambdaQueryWrapper();
-        lambdaQueryWrapper.eq(Movies::getMovieid,movieid);
-
+        lambdaQueryWrapper.in(Movies::getMovieid,searchId);
 
         IPage result=iMoviesService.listByMovieId(page,lambdaQueryWrapper);
+        return Result.success(result.getTotal(),result.getRecords());
+    }
+
+    //根据关键词展示电影
+    @PostMapping("listByKeyWord")
+    public Result listByKeyword(@RequestBody QueryPageParam queryPageParam){
+        HashMap param = queryPageParam.getParam();
+        String keyWord = (String) param.get("keyWord");
+        Page<Movies> page=new Page<>();
+        page.setCurrent(queryPageParam.getPageNum());
+        page.setSize(queryPageParam.getPageSize());
+
+        LambdaQueryWrapper<Movies> lambdaQueryWrapper = new LambdaQueryWrapper();
+        lambdaQueryWrapper.like(Movies::getTitle,keyWord);
+
+        IPage result=iMoviesService.listByKeyword(page,lambdaQueryWrapper);
         return Result.success(result.getTotal(),result.getRecords());
     }
 }
