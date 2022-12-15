@@ -37,9 +37,12 @@ public class MoviesController {
     @PostMapping("/listDefault")
     public Result listDefault(@RequestBody QueryPageParam queryPageParam){
         Page<Movies> page=new Page<>();
-        page.setCurrent(queryPageParam.getPageNum());
-        page.setSize(queryPageParam.getPageSize());
-
+        try{
+            page.setCurrent(queryPageParam.getPageNum());
+            page.setSize(queryPageParam.getPageSize());
+        }catch (Exception e){
+            return Result.error("参数缺失");
+        }
         IPage result=iMoviesService.listDefault(page);
         return Result.success(result.getTotal(),result.getRecords());
     }
@@ -47,11 +50,15 @@ public class MoviesController {
     //根据电影id展示电影
     @PostMapping("/listByMovieId")
     public Result listByMovieId(@RequestBody QueryPageParam queryPageParam){
-        List<Integer> searchId = (List)queryPageParam.getSearchId();
+        List<Integer> searchId;
         Page<Movies> page=new Page<>();
-        page.setCurrent(queryPageParam.getPageNum());
-        page.setSize(queryPageParam.getPageSize());
-
+        try{
+            searchId = (List)queryPageParam.getSearchId();
+            page.setCurrent(queryPageParam.getPageNum());
+            page.setSize(queryPageParam.getPageSize());
+        }catch (Exception e){
+            return Result.error("参数缺失");
+        }
         LambdaQueryWrapper<Movies> lambdaQueryWrapper = new LambdaQueryWrapper();
         lambdaQueryWrapper.in(Movies::getMovieid,searchId);
 
@@ -62,12 +69,18 @@ public class MoviesController {
     //根据关键词展示电影
     @PostMapping("listByKeyWord")
     public Result listByKeyword(@RequestBody QueryPageParam queryPageParam){
-        HashMap param = queryPageParam.getParam();
-        String keyWord = (String) param.get("keyWord");
+        HashMap param;
+        String keyWord;
         Page<Movies> page=new Page<>();
-        page.setCurrent(queryPageParam.getPageNum());
-        page.setSize(queryPageParam.getPageSize());
+        try{
+            param = queryPageParam.getParam();
+            keyWord = (String) param.get("keyWord");
 
+            page.setCurrent(queryPageParam.getPageNum());
+            page.setSize(queryPageParam.getPageSize());
+        }catch (Exception e){
+            return Result.error("参数缺失");
+        }
         LambdaQueryWrapper<Movies> lambdaQueryWrapper = new LambdaQueryWrapper();
         lambdaQueryWrapper.like(Movies::getTitle,keyWord);
 

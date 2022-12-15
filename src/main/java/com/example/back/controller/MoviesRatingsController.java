@@ -6,10 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.back.common.QueryPageParam;
 import com.example.back.common.Result;
-import com.example.back.entity.Movies;
-import com.example.back.entity.UsersRatings;
-import com.example.back.service.IUsersRatingsService;
-import io.swagger.models.auth.In;
+import com.example.back.entity.MoviesRatings;
+import com.example.back.service.IMoviesRatingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,31 +26,30 @@ import java.util.HashMap;
  * @since 2022-12-15
  */
 @RestController
-@RequestMapping("/users-ratings")
-public class UsersRatingsController {
+@RequestMapping("/movies-ratings")
+public class MoviesRatingsController {
     @Autowired
-    private IUsersRatingsService iUsersRatingsService;
+    private IMoviesRatingsService iMoviesRatingsService;
 
-    //根据性别和评分查询users、ratings联合数据
-    @PostMapping("/listByGenderRating")
-    public Result listByGenderRating(@RequestBody QueryPageParam queryPageParam){
+    //根据用户id查询users、ratings联合数据
+    @PostMapping("/listByUserId")
+    public Result listByUserId(@RequestBody QueryPageParam queryPageParam){
         HashMap param;
-        String gender;
-        Double rating;
-        Page<UsersRatings> page=new Page<>();
+        Integer userid;
+        Page<MoviesRatings> page=new Page<>();
         try{
             param = queryPageParam.getParam();
-            gender = (String) param.get("gender");
-            rating = (Double) param.get("rating");
+            userid = (Integer) param.get("userid");
             page.setCurrent(queryPageParam.getPageNum());
             page.setSize(queryPageParam.getPageSize());
         }catch (Exception e){
             return Result.error("参数缺失");
         }
-        LambdaQueryWrapper<UsersRatings> lambdaQueryWrapper = new LambdaQueryWrapper();
-        lambdaQueryWrapper.eq(UsersRatings::getGender,gender).gt(UsersRatings::getRating,rating);
+        LambdaQueryWrapper<MoviesRatings> lambdaQueryWrapper = new LambdaQueryWrapper();
+        lambdaQueryWrapper.eq(MoviesRatings::getUserid,userid);
 
-        IPage result=iUsersRatingsService.listByGenderRating(page,lambdaQueryWrapper);
+        IPage result=iMoviesRatingsService.listByUserId(page,lambdaQueryWrapper);
         return Result.success(result.getTotal(),result.getRecords());
     }
+
 }

@@ -45,9 +45,12 @@ public class BrowseRecordsController {
             return Result.error("参数缺失");
         }
         Page<BrowseRecords> page=new Page<>();
-        page.setCurrent(queryPageParam.getPageNum());
-        page.setSize(queryPageParam.getPageSize());
-
+        try{
+            page.setCurrent(queryPageParam.getPageNum());
+            page.setSize(queryPageParam.getPageSize());
+        }catch (Exception e){
+            return Result.error("参数缺失");
+        }
         LambdaQueryWrapper<BrowseRecords> lambdaQueryWrapper = new LambdaQueryWrapper();
         lambdaQueryWrapper.eq(BrowseRecords::getUserid,userid);
 

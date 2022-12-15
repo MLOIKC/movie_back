@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.back.mapper.MoviesRatingsMapper">
+    <select id="listByUserId" resultType="com.example.back.entity.MoviesRatings">
+        select distinct ratings.userId,movies.movieId,movies.title,movies.genres,ratings.rating
+        from movies,ratings ${ew.customSqlSegment} and ratings.movieId=movies.movieId order by ratings.`timestamp` desc
+    </select>
+</mapper>
