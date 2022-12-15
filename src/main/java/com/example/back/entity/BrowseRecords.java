@@ -25,5 +25,8 @@ public class BrowseRecords implements Serializable {
     @TableField("movieId")
     private Integer movieid;
 
+    private String title;
+
+    private String genres;
 
 }

@@ -1,7 +1,10 @@
 package com.example.back.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.back.entity.BrowseRecords;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.back.entity.Movies;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBrowseRecordsService extends IService<BrowseRecords> {
 
+    IPage getRecords(IPage<BrowseRecords> page, Wrapper ew);
 }

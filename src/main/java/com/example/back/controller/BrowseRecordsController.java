@@ -51,7 +51,7 @@ public class BrowseRecordsController {
         LambdaQueryWrapper<BrowseRecords> lambdaQueryWrapper = new LambdaQueryWrapper();
         lambdaQueryWrapper.eq(BrowseRecords::getUserid,userid);
 
-        IPage result=iBrowseRecordsService.page(page,lambdaQueryWrapper);
+        IPage result=iBrowseRecordsService.getRecords(page,lambdaQueryWrapper);
 
         return Result.success(result.getTotal(),result.getRecords());
     }

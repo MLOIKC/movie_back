@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.back.mapper.BrowseRecordsMapper">
-
+    <select id="getRecords" resultType="com.example.back.entity.BrowseRecords">
+        select userId,browse_records.movieId,title,genres from browse_records,movies ${ew.customSqlSegment} and browse_records.movieId=movies.movieId
+    </select>
 </mapper>

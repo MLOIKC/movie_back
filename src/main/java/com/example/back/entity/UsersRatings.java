@@ -32,5 +32,9 @@ public class UsersRatings implements Serializable {
 
     private Double rating;
 
+    private String title;
+
+    private String genres;
+
 
 }
