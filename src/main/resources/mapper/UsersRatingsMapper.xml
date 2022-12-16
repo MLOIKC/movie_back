@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.back.mapper.UsersRatingsMapper">
     <select id="listByGenderRating" resultType="com.example.back.entity.UsersRatings">
-        select users.userId,gender,name,ratings.movieId,rating,title,genres from users,ratings,movies ${ew.customSqlSegment} and users.userId= ratings.userId and ratings.movieId=movies.movieId
+        select users.userId,gender,name,ratings.movieId,rating,title,genres
+        from users,ratings,movies ${ew.customSqlSegment} and users.userId= ratings.userId and ratings.movieId=movies.movieId
     </select>
 </mapper>

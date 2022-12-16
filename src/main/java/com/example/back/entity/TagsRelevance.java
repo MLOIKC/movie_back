@@ -1,9 +1,8 @@
 package com.example.back.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-import java.util.List;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,26 +12,23 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author mloikc
- * @since 2022-12-15
+ * @since 2022-12-16
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class MoviesRatings implements Serializable {
+public class TagsRelevance implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId("userId")
     private Integer userid;
 
+    @TableField("movieId")
     private Integer movieid;
 
-    private String title;
+    private String tag;
 
-    private String genres;
+    private Double relevance;
 
-    private Double rating;
 
-    private List<String> tag;
-
-    private List<Double> relevance;
 }
