@@ -28,4 +28,9 @@ public class MoviesRatingsServiceImpl extends ServiceImpl<MoviesRatingsMapper, M
     public IPage listByUserId(IPage<MoviesRatings> page, Wrapper ew) {
         return moviesRatingsMapper.listByUserId(page,ew);
     }
+
+    @Override
+    public IPage showMostHotByGenres(IPage<MoviesRatings> page, Wrapper ew) {
+        return moviesRatingsMapper.showMostHotByGenres(page,ew);
+    }
 }

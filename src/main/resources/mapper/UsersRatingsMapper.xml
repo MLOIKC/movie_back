@@ -5,4 +5,12 @@
         select users.userId,gender,name,ratings.movieId,rating,title,genres
         from users,ratings,movies ${ew.customSqlSegment} and users.userId= ratings.userId and ratings.movieId=movies.movieId
     </select>
+    <select id="showMostHotByGender" resultType="com.example.back.entity.UsersRatings">
+        select movies.movieId,movies.title,movies.genres,AVG(rating) as rating,count(*) as hot
+        from movies,ratings,users
+            ${ew.customSqlSegment} and ratings.userId=users.userId and movies.movieId=ratings.movieId
+        group by movies.movieId
+        having count(*)>1
+        order by count(*)*AVG(rating) desc
+        </select>
 </mapper>

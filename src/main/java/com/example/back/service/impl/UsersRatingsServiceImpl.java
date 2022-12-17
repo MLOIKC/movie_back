@@ -28,4 +28,9 @@ public class UsersRatingsServiceImpl extends ServiceImpl<UsersRatingsMapper, Use
     public IPage listByGenderRating(IPage<UsersRatings> page, Wrapper ew) {
         return usersRatingsMapper.listByGenderRating(page,ew);
     }
+
+    @Override
+    public IPage showMostHotByGender(IPage<UsersRatings> page, Wrapper ew) {
+        return usersRatingsMapper.showMostHotByGender(page,ew);
+    }
 }

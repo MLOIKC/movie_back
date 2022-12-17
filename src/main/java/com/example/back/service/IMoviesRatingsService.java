@@ -16,4 +16,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IMoviesRatingsService extends IService<MoviesRatings> {
 
     IPage listByUserId(IPage<MoviesRatings> page, Wrapper ew);
+
+    IPage showMostHotByGenres(IPage<MoviesRatings> page, Wrapper ew);
 }

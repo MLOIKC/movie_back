@@ -17,4 +17,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface IUsersRatingsService extends IService<UsersRatings> {
 
     IPage listByGenderRating(IPage<UsersRatings> page, Wrapper ew);
+
+    IPage showMostHotByGender(IPage<UsersRatings> page, Wrapper ew);
 }

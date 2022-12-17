@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.back.common.QueryPageParam;
 import com.example.back.common.Result;
 import com.example.back.entity.BrowseRecords;
-import com.example.back.entity.User;
 import com.example.back.service.IBrowseRecordsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * <p>

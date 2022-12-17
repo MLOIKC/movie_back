@@ -18,4 +18,6 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UsersRatingsMapper extends BaseMapper<UsersRatings> {
 
     IPage listByGenderRating(IPage<UsersRatings> page, Wrapper ew);
+
+    IPage showMostHotByGender(IPage<UsersRatings> page, Wrapper ew);
 }

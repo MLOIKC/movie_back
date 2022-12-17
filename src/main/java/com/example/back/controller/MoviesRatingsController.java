@@ -38,7 +38,7 @@ public class MoviesRatingsController {
     @Autowired
     private ITagsRelevanceService iTagsRelevanceService;
 
-    //根据用户id查询users、ratings联合数据
+    //根据用户ID，搜索用户所看的电影名字和评分，按时间从新到旧排序，给出电影的前三个标签及关联度评分
     @PostMapping("/listByUserId")
     public Result listByUserId(@RequestBody QueryPageParam queryPageParam) {
         HashMap param;
@@ -79,4 +79,26 @@ public class MoviesRatingsController {
         }
         return Result.success(result.getTotal(), list);
     }
+
+    //查询某一风格最受欢迎的电影
+    @PostMapping("/showMostHotByGenres")
+    public Result showMostHotByGenres(@RequestBody QueryPageParam queryPageParam){
+        HashMap param;
+        String genres;
+        Page<MoviesRatings> page = new Page<>();
+        try {
+            param = queryPageParam.getParam();
+            genres = (String) param.get("genres");
+            page.setCurrent(queryPageParam.getPageNum());
+            page.setSize(queryPageParam.getPageSize());
+        } catch (Exception e) {
+            return Result.error("参数缺失");
+        }
+        LambdaQueryWrapper<MoviesRatings> lambdaQueryWrapper = new LambdaQueryWrapper();
+        lambdaQueryWrapper.like(MoviesRatings::getGenres, genres);
+
+        IPage result = iMoviesRatingsService.showMostHotByGenres(page, lambdaQueryWrapper);
+        return Result.success(result.getTotal(), result.getRecords());
+    }
+
 }

@@ -35,4 +35,6 @@ public class MoviesRatings implements Serializable {
     private List<String> tag;
 
     private List<Double> relevance;
+
+    private Integer hot;
 }

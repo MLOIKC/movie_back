@@ -18,4 +18,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MoviesRatingsMapper extends BaseMapper<MoviesRatings> {
     IPage listByUserId(IPage<MoviesRatings> page, Wrapper ew);
+
+    IPage showMostHotByGenres(IPage<MoviesRatings> page, Wrapper ew);
 }
