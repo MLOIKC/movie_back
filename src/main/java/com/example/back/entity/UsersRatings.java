@@ -36,5 +36,7 @@ public class UsersRatings implements Serializable {
 
     private String genres;
 
+    private String url;
+
     private Integer hot;
 }

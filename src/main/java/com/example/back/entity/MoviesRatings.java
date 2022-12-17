@@ -30,6 +30,8 @@ public class MoviesRatings implements Serializable {
 
     private String genres;
 
+    private String url;
+
     private Double rating;
 
     private List<String> tag;

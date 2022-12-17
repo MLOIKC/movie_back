@@ -29,4 +29,5 @@ public class BrowseRecords implements Serializable {
 
     private String genres;
 
+    private String url;
 }

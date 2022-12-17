@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.back.mapper.MoviesRatingsMapper">
     <select id="listByUserId" resultType="com.example.back.entity.MoviesRatings">
-        select distinct ratings.userId,movies.movieId,movies.title,movies.genres,ratings.rating
+        select distinct ratings.userId,movies.movieId,movies.title,movies.genres,movies.url,ratings.rating
         from movies,ratings ${ew.customSqlSegment} and ratings.movieId=movies.movieId order by ratings.`timestamp` desc
     </select>
     <select id="showMostHotByGenres" resultType="com.example.back.entity.MoviesRatings">
-        select movies.movieId,movies.title,movies.genres,AVG(rating) as rating,count(*)as hot
+        select movies.movieId,movies.title,movies.genres,movies.url,AVG(rating) as rating,count(*)as hot
         from movies,ratings
         ${ew.customSqlSegment} and movies.movieId=ratings.movieId
         group by movies.movieId
