@@ -44,7 +44,7 @@ public class UsersRatingsController {
         try{
             param = queryPageParam.getParam();
             gender = (String) param.get("gender");
-            rating = (Double) param.get("rating");
+            rating = Double.parseDouble(param.get("rating").toString());
             page.setCurrent(queryPageParam.getPageNum());
             page.setSize(queryPageParam.getPageSize());
         }catch (Exception e){

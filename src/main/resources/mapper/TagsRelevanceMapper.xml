@@ -2,18 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.back.mapper.TagsRelevanceMapper">
     <select id="listTagRelevance" resultType="com.example.back.entity.TagsRelevance">
-        SELECT DISTINCT tags.userId,tags.movieId,tags.tag,genome_scores.relevance
-        FROM genome_tags,tags,genome_scores
-        WHERE tags.userId=#{userid}
-          AND tags.movieId IN
+        SELECT DISTINCT genome_scores.movieId,genome_tags.tag,genome_scores.relevance
+        FROM genome_tags,genome_scores
+        WHERE genome_scores.movieId IN
         <foreach collection="movieIdList" item="movieId" index="index"
                  open="(" close=")" separator=",">
             #{movieId}
         </foreach>
-          AND tags.tag=genome_tags.tag
           AND genome_tags.tagId=genome_scores.tagId
-          AND tags.movieId=genome_scores.movieId
         GROUP BY genome_tags.tagId
-        ORDER BY tags.`timestamp` DESC
+        ORDER BY genome_scores.relevance DESC
     </select>
 </mapper>
